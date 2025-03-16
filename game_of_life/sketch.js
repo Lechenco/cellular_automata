@@ -5,10 +5,9 @@ async function setup() {
   createCanvas(800, 800)
   grid = new Grid(GRID_SIZE, GRID_SIZE)
 
-  if(RANDOMIZE_START_STATE)
-    grid.generateRandomState()
-  else 
-    grid.setupState(START_STATE)
+  grid.setup({
+    initial_state: RANDOMIZE_START_STATE ? undefined : START_STATE
+  })
 }
 
 async function draw() {
