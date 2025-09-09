@@ -3,6 +3,7 @@ class Game {
         this.width = width
         this.height = height
         this.state = this._createState()
+        this.neighbourhood = new Neighbourhood()
     }
 
     setup( config = {initial_state: undefined}) {
@@ -48,14 +49,7 @@ class Game {
     }
 
     _aliveNeighbours(x, y) {
-        let n = 0
-        for(let i = max(0, x-1); i<=min(this.width -1, x+1); i++) {
-            for(let j = max(0, y-1); j<=min(this.height -1, y+1); j++) {
-                if (i == x && j == y) continue
-                n += this.state[i][j]
-            }
-        }
-        return n
+        return this.neighbourhood.getAliveNeighbours(this.state, x, y)
     }
 
     _cellLives(numberOfNeighbours, currentState) {
